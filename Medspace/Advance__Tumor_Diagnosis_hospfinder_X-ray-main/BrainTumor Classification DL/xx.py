@@ -18,7 +18,7 @@ from huggingface_hub import login
 
 app = Flask(__name__)
 
-login(token="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")
+login(token="") # Add your hugging face login token here
 
 model_name = "manoj2423/medi"
 subfolder = "model"  # Explicitly load from this subfolder
