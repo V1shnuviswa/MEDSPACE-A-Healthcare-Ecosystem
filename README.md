@@ -77,6 +77,9 @@ By automating diagnostic and administrative tasks, the platform reduces manual w
 - ⏱️ 50% reduction in manual workload for hospital staff
 
 ---
+## Demo Video
+🎬 [Download demo video](https://github.com/V1shnuviswa/MEDSPACE-A-Healthcare-Ecosystem/blob/4ee598c407ea33099af3588c823d587863bf264e/WhatsApp%20Video%202025-07-01%20at%2019.02.46.mp4)
+
 
 ## 🚀 How to Run the Project
 
