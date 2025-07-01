@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <h1>Healthcare Chatbot</h1>
+
+    <!-- Authentication Section -->
+    <div id="authSection">
+        <h2>Login / Register</h2>
+        <input type="text" id="username" placeholder="Enter Username" required>
+        <input type="password" id="password" placeholder="Enter Password" required>
+        <button id="registerButton">Register</button>
+        <button id="loginButton">Login</button>
+        <button id="logoutButton" style="display:none;">Logout</button>
+        <p id="authMessage"></p>
+    </div>
+
+    <!-- Upload Medical Record Section (Hidden if Not Logged In) -->
+    <div id="uploadSection" style="display:none;">
+        <h2>Upload Medical Records</h2>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" id="files" name="files" accept=".pdf" multiple required>
+            <button type="submit">Upload</button>
+        </form>
+        <p id="uploadMessage"></p>
+    </div>
+
+    <!-- Chatbot Section (Hidden if Not Logged In) -->
+    <div id="chatSection" style="display:none;">
+        <h2>Chat with AI</h2>
+        <div id="chatBox">
+            <div id="chatMessages"></div>
+        </div>
+        <input type="text" id="query" placeholder="Ask a medical question">
+        <button id="askButton">Ask</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            checkAuthStatus();
+        });
+
+        // Register
+        document.getElementById("registerButton").addEventListener("click", function() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+
+            fetch("/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("authMessage").textContent = data.message || data.error;
+            })
+            .catch(error => console.error("Error:", error));
+        });
+
+        // Login
+        document.getElementById("loginButton").addEventListener("click", function() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+
+            fetch("/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    sessionStorage.setItem("loggedIn", "true");
+                    showSections();
+                }
+                document.getElementById("authMessage").textContent = data.message || data.error;
+            })
+            .catch(error => console.error("Error:", error));
+        });
+
+        // Logout
+        document.getElementById("logoutButton").addEventListener("click", function() {
+            fetch("/logout", { method: "POST" })
+            .then(() => {
+                sessionStorage.removeItem("loggedIn");
+                hideSections();
+            })
+            .catch(error => console.error("Error:", error));
+        });
+
+        // File Upload
+        document.getElementById("uploadForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let formData = new FormData();
+            let files = document.getElementById("files").files;
+
+            for (let i = 0; i < files.length; i++) {
+                formData.append("files", files[i]);
+            }
+
+            fetch("/upload", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("uploadMessage").textContent = data.message || data.error;
+            })
+            .catch(error => console.error("Error:", error));
+        });
+
+        // Chatbot Query
+        document.getElementById("askButton").addEventListener("click", function() {
+            let query = document.getElementById("query").value;
+            let chatMessages = document.getElementById("chatMessages");
+
+            if (query.trim() === "") return;
+
+            // Add user message
+            let userMessage = document.createElement("p");
+            userMessage.textContent = "You: " + query;
+            chatMessages.appendChild(userMessage);
+
+            // Send query to chatbot
+            fetch("/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ query })
+            })
+            .then(response => response.json())
+            .then(data => {
+                let botMessage = document.createElement("p");
+                botMessage.textContent = "AI: " + (data.response || data.error);
+                chatMessages.appendChild(botMessage);
+            })
+            .catch(error => console.error("Error:", error));
+
+            document.getElementById("query").value = "";
+        });
+
+        // Check authentication status
+        function checkAuthStatus() {
+            if (sessionStorage.getItem("loggedIn")) {
+                showSections();
+            } else {
+                hideSections();
+            }
+        }
+
+        function showSections() {
+            document.getElementById("authSection").style.display = "none";
+            document.getElementById("uploadSection").style.display = "block";
+            document.getElementById("chatSection").style.display = "block";
+            document.getElementById("logoutButton").style.display = "inline-block";
+        }
+
+        function hideSections() {
+            document.getElementById("authSection").style.display = "block";
+            document.getElementById("uploadSection").style.display = "none";
+            document.getElementById("chatSection").style.display = "none";
+            document.getElementById("logoutButton").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>

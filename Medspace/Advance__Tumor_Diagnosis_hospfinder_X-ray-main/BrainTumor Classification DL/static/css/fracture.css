@@ -1,0 +1,256 @@
+/* General Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #E8F0FE;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+/* Sidebar */
+.sidebar {
+    background-color: #E7EDFF;
+    width: 250px;
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+/* Sidebar Logo */
+.sidebar h2 {
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+}
+
+.sidebar h2 img {
+    width: 26px;
+    height: 26px;
+}
+
+/* Sidebar Navigation */
+.sidebar nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.sidebar nav a img {
+    width: 18px;
+    height: 18px;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+    background-color: #D0DBFF;
+}
+
+/* Logout Button */
+.sidebar a.logout {
+    margin-top: auto;
+    padding: 12px;
+    color: red;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar a.logout img {
+    width: 18px;
+    height: 18px;
+}
+/* Main Content with Animated Background */
+.main {
+    margin-left: 290px;
+    padding: 20px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Floating Background Effect */
+.main::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgba(0, 123, 255, 0.15);
+    border-radius: 50%;
+    animation: float 6s infinite alternate ease-in-out;
+    z-index: -1;
+}
+
+.main::after {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 250px;
+    height: 250px;
+    background: rgba(52, 16, 99, 0.15);
+    border-radius: 50%;
+    animation: float 5s infinite alternate ease-in-out;
+    z-index: -1;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px) scale(1); }
+    100% { transform: translateY(30px) scale(1.1); }
+}
+/* New Content Section */
+.content-section {
+    background: #f8f9ff;
+    padding: 20px;
+    border-radius: 1px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.content-section h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #007BFF;
+}
+
+.content-section p {
+    font-size: 16px;
+    color: #444;
+    line-height: 1.6;
+}
+
+
+/* Header */
+.header h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+}
+
+/* Upload Section */
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    margin-left: 20px;
+    left: 20%;
+}
+
+/* Header */
+.container h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+/* File Upload */
+.file-upload {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F8F9FA;
+    border: 2px dashed #007bff;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 20px;
+}
+
+/* Hover Effect */
+.file-upload:hover {
+    border-color: #0056b3;
+    box-shadow: 0 0 15px rgba(0, 91, 230, 0.4);
+    transform: scale(1.02);
+}
+
+/* Hide default file input */
+.file-upload input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Custom File Upload Label */
+.file-upload label {
+    font-size: 16px;
+    color: #007bff;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Buttons */
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Upload Button */
+.btn-primary {
+    background: #4f5c686c;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Button Hover Effects */
+.btn-primary:hover {
+    background: #0056B3;
+    transform: scale(1.05);
+    box-shadow: 0 0 12px rgba(0, 91, 230, 0.3);
+}
+
+/* Image Preview */
+.image-section {
+    margin-top: 20px;
+    display: none;
+}
+
+.image-section img {
+    width: 300px;
+    height: 300px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+}

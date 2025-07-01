@@ -1,0 +1,6 @@
+flask
+pymongo
+python-dotenv
+groq
+PyPDF2
+werkzeug

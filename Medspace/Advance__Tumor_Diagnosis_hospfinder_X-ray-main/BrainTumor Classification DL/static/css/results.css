@@ -1,0 +1,114 @@
+/* General Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #E8F0FE;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+/* Header */
+h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #007BFF;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #0056B3;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Paragraphs */
+p {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* Search Results Container */
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+}
+
+/* Map */
+/* Increase Map Size */
+iframe {
+    width: 400px;  /* Set fixed width */
+    height: 400px; /* Set equal height */
+    max-width: 100%; /* Ensure responsiveness */
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+    iframe {
+        width: 300px;  /* Smaller square for mobile */
+        height: 300px;
+    }
+}
+
+
+/* Back Button */
+a {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #007BFF;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+a:hover {
+    background: #0056B3;
+    box-shadow: 0 0 12px rgba(0, 91, 230, 0.3);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    iframe {
+        width: 100%;
+        height: 300px;
+    }
+}

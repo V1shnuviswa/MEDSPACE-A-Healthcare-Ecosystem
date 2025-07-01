@@ -1,0 +1,157 @@
+/* General Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #E8F0FE;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    position: relative;
+    overflow-x: hidden; /* Remove horizontal scroll */
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #E7EDFF;
+    width: 250px;
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    overflow-y: auto; /* Scrollable sidebar if content is too long */
+}
+
+/* Sidebar Logo */
+.sidebar h2 {
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+}
+
+.sidebar h2 img {
+    width: 26px;
+    height: 26px;
+}
+
+/* Sidebar Navigation */
+.sidebar nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.sidebar nav a img {
+    width: 18px;
+    height: 18px;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+    background-color: #D0DBFF;
+}
+
+/* Logout Button */
+.sidebar a.logout {
+    margin-top: auto;
+    padding: 12px;
+    color: red;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar a.logout img {
+    width: 18px;
+    height: 18px;
+}
+
+/* Main Content */
+.main {
+    margin-left: 300px;
+    padding: 20px;
+    width: calc(100% - 270px);
+    overflow-y: auto;
+    height: 100vh; /* Ensures scrolling inside main content */
+}
+
+/* Header */
+.header h1 {
+    font-size: 26px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Content Section */
+.content-section {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: calc(100% - 40px); /* Extends the section to the right */
+    margin: 0 auto;
+}
+
+/* Form Styles */
+form {
+    text-align: center;
+}
+
+label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+}
+
+input {
+    padding: 10px;
+    font-size: 14px;
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #4f5c68;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background: #0056B3;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+    .main {
+        margin-left: 220px;
+    }
+}
