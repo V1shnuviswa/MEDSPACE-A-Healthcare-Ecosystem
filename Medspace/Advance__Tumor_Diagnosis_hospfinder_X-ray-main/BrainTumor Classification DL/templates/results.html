@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Search Results</title>
+    <link rel="stylesheet" href="../static/css/results.css">
+</head>
+<body>
+    <h1>🏥 Nearest Hospital Found</h1>
+
+    <h2>🩺 Predicted Specialty: {{ specialty }}</h2>
+
+    {% if name != "Unknown Hospital" %}
+        <h3>📍 Hospital: {{ name }}</h3>
+        <p>📌 Address: {{ address }}</p>
+
+        <h3>🗺️ Interactive Map:</h3>
+        <iframe src="{{ url_for('static', filename='map.html') }}" width="600" height="450"></iframe>
+    {% else %}
+        <h3> No hospital found nearby for this specialty.</h3>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('home') }}"> Search Again</a>
+</body>
+</html>

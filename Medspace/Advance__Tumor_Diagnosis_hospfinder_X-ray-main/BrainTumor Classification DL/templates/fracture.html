@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bone Fracture Detection</title>
+    <link rel="stylesheet" href="../static/css/fracture.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>
+            <img src="../static/images/logo.jpeg" alt="Stethoscope" style="width: 75px; height: auto;">
+            <span style="font-family: 'Playfair Display', sans-serif; font-size: 18px; font-weight: bold;">MedCare Ecosystem</span>
+        </h2>
+        <nav>
+            <a href="/home" >
+                <img src="../static/images/overview.png" alt="Overview"> Overview
+            </a>
+            <a href="/mri_ct_scan" class="active">
+                <img src="../static/images/mrictscan.png" alt="MRI/CT Scans"> Medical Image Analyzer
+            </a>
+            <a href="#">
+                <img src="../static/images/medicalreport.png" alt="Medical Report"> Medical Report
+            </a>
+            <a href="/find_hospital">
+                <img src="../static/images/findhospital.png" alt="Find Hospitals"> Find Hospitals
+            </a>
+        </nav>
+        <a href="/" class="logout">
+            <img src="../static/images/logout.png" alt="Logout"> Logout
+        </a>
+    </div>
+     <!-- Main Content -->
+     <div class="main">
+        <div class="header">
+            <h1>Fracture Detection Analyzer</h1>
+        </div>
+        <div class="content-section">
+            <h2>Analyzing Fracture using X-rays</h2>
+            
+            <p>
+                Fracture detection in healthcare websites uses AI-powered analysis of X-rays and CT scans to quickly identify bone fractures. It enhances diagnosis with real-time alerts and visual aids, 
+                ensuring faster and more accurate patient care.
+            </p>
+        </div>
+    <div class="container">
+        <h1>Upload X-ray Image for Fracture Detection</h1>
+        <form action="{{ url_for('fracture_detection') }}" method="post" enctype="multipart/form-data">
+
+            <div class="file-upload">
+                <input type="file" name="file" id="file" required>
+                <label for="file">Choose an X-ray Image</label>
+            </div>
+            <button type="submit" class="btn-primary">Upload & Predict</button>
+        </form>
+        <div class="image-section">
+            <img id="preview" src="" alt="X-ray Preview">
+        </div>
+    </div>
+</body>
+</html>

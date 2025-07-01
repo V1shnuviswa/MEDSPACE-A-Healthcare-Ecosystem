@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healthcare Ecosystem</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/home.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>
+      <img src="../static/images/logo.jpeg" alt="Stethoscope" style="width: 85px; height: auto;">
+      <span style="font-family: 'Playfair Display', sans-serif; font-size: 18px; font-weight: bold; justify-content: center;">
+        MEDCARE ECOSYSTEM
+      </span>
+    </h2>
+    <nav>
+      <a href="/home" class="active">
+        <img src="../static/images/overview.png" alt="Overview"> Overview
+      </a>
+      <a href="/analyzer">
+        <img src="../static/images/mrictscan.png" alt="MRI/CT Scans"> Medical Image Analyzer
+      </a>
+      <a href="/medical-report">
+        <img src="../static/images/medicalreport.png" alt="Medical Report"> Medical Report
+      </a>
+      <a href="/find_hospital">
+        <img src="../static/images/findhospital.png" alt="Find Hospitals"> Find Hospitals
+      </a>
+    </nav>
+    <a href="/" class="logout">
+      <img src="../static/images/logout.png" alt="Logout"> Logout
+    </a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <section class="hero">
+      <h1>Where Technology Meets Compassion.<br />Your Health, Our Ecosystem.</h1>
+      <div class="hero-buttons">
+        <a href="/symptom" class="btn-primary">Diagnosis</a>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+      <div class="service-card">
+        <img src="https://img.icons8.com/ios-filled/50/000000/calendar-plus.png" alt="Healthcare Tips">
+        <button onclick="location.href='/tips'">Healthcare Tips</button>
+        <p>Know about your Health</p>
+      </div>
+    
+      <div class="service-card">
+        <img src="https://img.icons8.com/ios-filled/50/000000/virus.png" alt="Disease Search">
+        <button onclick="location.href='/symptom'">Search Disease & Conditions</button>
+        <p>Find accurate information</p>
+      </div>
+    
+      <div class="service-card">
+        <img src="../static/images/bmi.png" alt="BMI Calculator">
+        <button onclick="location.href='/bmi'">BMI Calculator</button>
+        <p>Calculate the BMI of your body</p>
+      </div>
+    </section>
+    
+    
+  </div>
+
+</body>
+</html>

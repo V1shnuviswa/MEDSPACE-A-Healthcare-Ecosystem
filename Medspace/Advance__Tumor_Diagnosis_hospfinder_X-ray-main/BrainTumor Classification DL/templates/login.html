@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedSpace Login</title>
+    <link rel="stylesheet" href="../static/css/login.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="login-box">
+            <div class="logo">
+               <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Logo">
+            </div>
+            <h2 id="form-title">Welcome!</h2>
+            <p id="form-subtitle">Sign in to your account</p>
+
+            <form id="auth-form">
+                <div id="name-field" class="input-group hidden">
+                    <input type="text" id="full-name" placeholder="Full Name">
+                </div>
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+
+                <div id="remember-section" class="remember-forgot">
+                    <label><input type="checkbox"> Remember me</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+
+                <button type="submit" id="submit-btn">Sign In</button>
+            </form>
+
+            <p class="toggle-mode">
+                Don't have an account? <button id="toggle-auth">Sign up</button>
+            </p>
+        </div>
+    </div>
+
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

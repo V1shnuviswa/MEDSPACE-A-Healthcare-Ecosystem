@@ -1,0 +1,49 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Diagnosis - Symptom Checker</title>
+    <link rel="stylesheet" href="../static/css/symptomsy.css">
+</head>
+<body>
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h2>
+            <img src="../static/images/logo.jpeg" alt="Stethoscope" style="width: 75px; height: auto;">
+            <span style="font-family: 'Playfair Display', sans-serif; font-size: 18px; font-weight: bold;">MedCare Ecosystem</span>
+        </h2>
+        <nav>
+            <a href="/home" class="active">
+                <img src="../static/images/overview.png" alt="Overview"> Overview
+            </a>
+            <a href="/mri_ct_scan" >
+                <img src="../static/images/mrictscan.png" alt="MRI/CT Scans"> Medical Image Analyzer
+            </a>
+            <a href="#">
+                <img src="../static/images/medicalreport.png" alt="Medical Report"> Medical Report
+            </a>
+            <a href="/find_hospital">
+                <img src="../static/images/findhospital.png" alt="Find Hospitals"> Find Hospitals
+            </a>
+        </nav>
+        <a href="/" class="logout">
+            <img src="../static/images/logout.png" alt="Logout"> Logout
+        </a>
+    </div>
+    
+    <div class="main-content">
+        <h1>Symptom Checker</h1>
+        <p>Our Symptom Checker helps you understand potential health conditions based on the symptoms you enter. 
+        Simply type your symptoms in the field below, and our system will analyze them to provide a potential diagnosis. 
+        Remember, this is not a substitute for professional medical advice. If you experience severe symptoms, please consult a doctor.</p>
+        
+        <h2>Enter Symptoms</h2>
+        <form action="/symptom" method="post">
+            <input type="text" name="symptoms" placeholder="Enter symptoms here..." required>
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+</body>
+</html>

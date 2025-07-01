@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* 🌟 Modern Font */
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #6A5ACD, #483D8B); /* Deep Purple Gradient */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff;
+        }
+
+        /* 📦 Glassmorphism Container */
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 30px;
+            width: 380px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 🎨 Input & Select Fields */
+        select, input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+            font-size: 18px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* 🔘 Button */
+        button {
+            background: #ff4081;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            background: #e91e63;
+        }
+
+        /* 📢 BMI Result */
+        #result {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 8px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.5s ease-out;
+        }
+
+        .show-result {
+            opacity: 1 !important;
+            transform: scale(1) !important;
+        }
+
+        .bmi-underweight { background: #ffc107; color: #333; }
+        .bmi-normal { background: #4caf50; color: white; }
+        .bmi-overweight { background: #ff9800; color: white; }
+        .bmi-obese { background: #f44336; color: white; }
+
+        /* 📜 BMI History */
+        .history {
+            max-height: 120px;
+            overflow-y: auto;
+            margin-top: 10px;
+            text-align: left;
+            padding: 8px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* 📊 Chart */
+        canvas {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <h2> BMI Calculator</h2>
+
+    <div class="container">
+        <select id="unit">
+            <option value="metric">Metric (kg, cm)</option>
+            <option value="imperial">Imperial (lbs, inches)</option>
+        </select>
+
+        <input type="number" id="weight" placeholder="Enter weight">
+        <input type="number" id="height" placeholder="Enter height">
+        
+        <button onclick="calculateBMI()">Calculate BMI</button>
+        <p id="result"></p>
+
+        <h4>📜 BMI History</h4>
+        <div class="history" id="history"></div>
+
+        <canvas id="bmiChart"></canvas>
+    </div>
+
+    <script>
+        let bmiHistory = JSON.parse(localStorage.getItem("bmiHistory")) || [];
+
+        function calculateBMI() {
+            let weight = parseFloat(document.getElementById("weight").value);
+            let height = parseFloat(document.getElementById("height").value);
+            let unit = document.getElementById("unit").value;
+            
+            if (!weight || !height) {
+                alert("⚠️ Enter valid weight & height!");
+                return;
+            }
+
+            if (unit === "imperial") {
+                weight = weight * 0.453592;
+                height = height * 2.54;
+            }
+
+            height = height / 100;
+            let bmi = (weight / (height * height)).toFixed(2);
+            
+            let resultElement = document.getElementById("result");
+
+            if (bmi < 18.5) {
+                resultElement.innerHTML = `Your BMI: ${bmi} - Underweight 🟡`;
+                resultElement.className = "bmi-underweight show-result";
+            } else if (bmi < 24.9) {
+                resultElement.innerHTML = `Your BMI: ${bmi} - Normal ✅`;
+                resultElement.className = "bmi-normal show-result";
+            } else if (bmi < 29.9) {
+                resultElement.innerHTML = `Your BMI: ${bmi} - Overweight ⚠️`;
+                resultElement.className = "bmi-overweight show-result";
+            } else {
+                resultElement.innerHTML = `Your BMI: ${bmi} - Obese ❌`;
+                resultElement.className = "bmi-obese show-result";
+            }
+
+            bmiHistory.push({ bmi, date: new Date().toLocaleDateString() });
+            if (bmiHistory.length > 5) bmiHistory.shift();
+            localStorage.setItem("bmiHistory", JSON.stringify(bmiHistory));
+
+            updateHistory();
+            updateChart();
+            
+            let speech = new SpeechSynthesisUtterance(resultElement.innerText);
+            speech.lang = "en-US";
+            speechSynthesis.speak(speech);
+        }
+
+        function updateHistory() {
+            let historyDiv = document.getElementById("history");
+            historyDiv.innerHTML = bmiHistory.map(entry => `<p>${entry.date}: BMI ${entry.bmi}</p>`).join("");
+        }
+
+        function updateChart() {
+            let ctx = document.getElementById('bmiChart').getContext('2d');
+            let chartData = bmiHistory.map(entry => entry.bmi);
+            let chartLabels = bmiHistory.map(entry => entry.date);
+
+            if (window.bmiChart) window.bmiChart.destroy();
+
+            window.bmiChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: chartLabels,
+                    datasets: [{
+                        label: 'BMI Trend',
+                        data: chartData,
+                        borderColor: '#ff4081',
+                        borderWidth: 2,
+                        fill: false,
+                        pointBackgroundColor: '#ff4081',
+                        pointRadius: 5
+                    }]
+                }
+            });
+        }
+
+        window.onload = function() {
+            updateHistory();
+            updateChart();
+        };
+    </script>
+
+</body>
+</html>

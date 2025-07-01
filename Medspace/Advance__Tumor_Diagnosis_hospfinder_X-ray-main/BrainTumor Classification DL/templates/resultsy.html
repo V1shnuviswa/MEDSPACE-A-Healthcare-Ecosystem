@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnosis Result</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F5FF;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Centered Container */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* Result Card */
+        .result-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Title */
+        h2 {
+            color: #0056b3;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        /* Text Styles */
+        p {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Strong Tags */
+        p strong {
+            color: #0056b3;
+        }
+
+        /* Info Message */
+        .info {
+            font-weight: bold;
+            color: #d9534f;
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 18px;
+            color: white;
+            background-color: #0056b3;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background 0.3s ease-in-out, transform 0.2s;
+        }
+
+        .back-btn:hover {
+            background-color: #003d80;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="result-card">
+            <h2>Prediction Result</h2>
+
+            {% if info %}
+                <p class="info">{{ info }}</p>
+            {% else %}
+                <p><strong>Symptoms:</strong> {{ symptoms }}</p>
+                <p><strong>Diagnosis:</strong> {{ disease_prediction }}</p>
+                <p><strong>Medications:</strong> {{ medications }}</p>
+                <p><strong>Diet:</strong> {{ diet }}</p>
+                <p><strong>Precautions:</strong> {{ precautions }}</p>
+            {% endif %}
+
+            <br>
+            <a href="/symptom" class="back-btn">Go Back</a>
+        </div>
+    </div>
+
+</body>
+</html>

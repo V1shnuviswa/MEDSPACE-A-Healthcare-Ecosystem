@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Detection</title>
+    <link rel="stylesheet" href="../static/css/braintumour.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>
+            <img src="../static/images/logo.jpeg" alt="Stethoscope" style="width: 75px; height: auto;">
+<span style="font-family: 'Playfair Display', sans-serif; font-size: 18px; font-weight: bold;">MedCare Ecosystem</span>
+        </h2>
+        <nav>
+            <a href="/home" >
+                <img src="../static/images/overview.png" alt="Overview"> Overview
+            </a>
+            <a href="/analyzer" class="active">
+                <img src="../static/images/mrictscan.png" alt="MRI/CT Scans"> Medical Image Analyzer
+            </a>
+            <a href="#">
+                <img src="../static/images/medicalreport.png" alt="Medical Report"> Medical Report
+            </a>
+            <a href="/find_hospital">
+                <img src="../static/images/findhospital.png" alt="Find Hospitals"> Find Hospitals
+            </a>
+        </nav>
+        <a href="/" class="logout">
+            <img src="../static/images/logout.png" alt="Logout"> Logout
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <div class="header">
+            <h1>Brain Tumor Analyzer</h1>
+        </div>
+        <div class="content-section">
+            <h2>Analyzing Brain Tumors using MRI/CT Scans</h2>
+            
+            <p>
+                Advanced AI models can analyze these scans to detect abnormalities, classify tumors, and assist 
+                doctors in early diagnosis. This system allows users to upload MRI/CT scans for automated detection 
+                and prediction of potential brain tumors.
+            </p>
+        </div>
+
+        <div class="container">
+            <form id="upload-file" method="post" enctype="multipart/form-data" action="/predict">
+                
+                <div class="file-upload">
+                    <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg" required>
+                    <label for="imageUpload">
+                        <img src="../static/images/upload.png" alt="Upload"> Click to Choose File
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    <img src="../static/images/upload.png" alt="Upload"> 
+                </button>
+            </form>
+
+            <div class="image-section" style="display:none;">
+                <img id="imagePreview" src="#" />
+            </div>
+
+            <div class="loader" style="display:none;"></div>
+
+            <h3 id="result">
+                <span></span>
+            </h3>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("imageUpload").addEventListener("change", function(event) {
+            const imageSection = document.querySelector(".image-section");
+            const imagePreview = document.getElementById("imagePreview");
+
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imageSection.style.display = "block";
+                };
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+        document.getElementById("upload-file").onsubmit = async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.text();
+            document.getElementById('result').innerHTML = `<span>${result}</span>`;
+        };
+    </script>
+    
+
+</body>
+</html>

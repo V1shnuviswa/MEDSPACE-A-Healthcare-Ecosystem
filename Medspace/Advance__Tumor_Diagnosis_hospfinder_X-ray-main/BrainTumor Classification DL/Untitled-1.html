@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Form with Validation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    input {
+      padding: 0.5rem;
+      width: 300px;
+    }
+    .error {
+      color: red;
+      font-size: 0.9rem;
+    }
+    .success {
+      color: green;
+      font-size: 0.9rem;
+    }
+    button:disabled {
+      background-color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Registration Form</h2>
+  <form id="myForm" novalidate>
+    <div class="form-group">
+      <label>Name:</label><br>
+      <input type="text" id="name" />
+      <div id="nameError" class="error"></div>
+    </div>
+
+    <div class="form-group">
+      <label>Email:</label><br>
+      <input type="email" id="email" />
+      <div id="emailError" class="error"></div>
+    </div>
+
+    <div class="form-group">
+      <label>Password:</label><br>
+      <input type="password" id="password" />
+      <div id="passwordError" class="error"></div>
+    </div>
+
+    <button type="submit" id="submitBtn" disabled>Submit</button>
+  </form>
+
+  <script>
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const submitBtn = document.getElementById('submitBtn');
+
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+
+    function validateName() {
+      const name = nameInput.value.trim();
+      if (name === '') {
+        nameError.textContent = 'Name is required';
+        return false;
+      } else {
+        nameError.textContent = '';
+        return true;
+      }
+    }
+
+    function validateEmail() {
+      const email = emailInput.value.trim();
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!regex.test(email)) {
+        emailError.textContent = 'Invalid email address';
+        return false;
+      } else {
+        emailError.textContent = '';
+        return true;
+      }
+    }
+
+    function validatePassword() {
+      const password = passwordInput.value;
+      const regex = /^(?=.*[0-9]).{6,}$/;
+      if (!regex.test(password)) {
+        passwordError.textContent = 'Password must be at least 6 characters and include a number';
+        return false;
+      } else {
+        passwordError.textContent = '';
+        return true;
+      }
+    }
+
+    function validateForm() {
+      const isNameValid = validateName();
+      const isEmailValid = validateEmail();
+      const isPasswordValid = validatePassword();
+      submitBtn.disabled = !(isNameValid && isEmailValid && isPasswordValid);
+    }
+
+    nameInput.addEventListener('input', validateForm);
+    emailInput.addEventListener('input', validateForm);
+    passwordInput.addEventListener('input', validateForm);
+
+    document.getElementById('myForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert("Form submitted successfully!");
+    });
+  </script>
+
+</body>
+</html>

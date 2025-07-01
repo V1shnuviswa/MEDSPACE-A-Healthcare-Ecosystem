@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Finder</title>
+    <link rel="stylesheet" href="../static/css/hf.css">
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showPosition(position) {
+            document.getElementById("latitude").value = position.coords.latitude;
+            document.getElementById("longitude").value = position.coords.longitude;
+        }
+
+        function showError(error) {
+            alert("Error getting location: " + error.message);
+        }
+    </script>
+</head>
+<body onload="getLocation()">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>
+            <img src="../static/images/logo.jpeg" alt="Stethoscope" style="width: 75px; height: auto;">
+<span style="font-family: 'Playfair Display', sans-serif; font-size: 18px; font-weight: bold;">MedCare Ecosystem</span>
+        </h2>
+        <nav>
+            <a href="/home" >
+                <img src="../static/images/overview.png" alt="Overview"> Overview
+            </a>
+            <a href="/analyzer" >
+                <img src="../static/images/mrictscan.png" alt="MRI/CT Scans"> Medical Image Analyzer
+            </a>
+            <a href="/mrreport">
+                <img src="../static/images/medicalreport.png" alt="Medical Report"> Medical Report
+            </a>
+            <a href="/find_hospital"  class="active">
+                <img src="../static/images/findhospital.png" alt="Find Hospitals"> Find Hospitals
+            </a>
+        </nav>
+        <a href="/" class="logout">
+            <img src="../static/images/logout.png" alt="Logout"> Logout
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <div class="header">
+            <h1>🏥 Hospital Finder</h1>
+        </div>
+
+        <div class="content-section">
+            <h2>Find the Best Hospitals Near You</h2>
+            <p>Enter your health issue, and we'll locate the best nearby hospitals for you.</p>
+
+            <!-- Change the form action to '/hospital_results' -->
+            <form action="{{ url_for('hospital_results') }}" method="POST">
+                <label>🩺 Enter your health issue:</label>
+                <input type="text" name="health_issue" required>
+
+                <br><br>
+                <label>📍 Your Location:</label>
+                <input type="hidden" id="latitude" name="latitude" required>
+                <input type="hidden" id="longitude" name="longitude" required>
+
+                <button type="submit">🔍 Find Hospital</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
