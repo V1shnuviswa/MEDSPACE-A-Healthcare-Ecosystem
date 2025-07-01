@@ -79,7 +79,7 @@ By automating diagnostic and administrative tasks, the platform reduces manual w
 ---
 ## Demo Video
 🎬 [Download demo video](https://github.com/V1shnuviswa/MEDSPACE-A-Healthcare-Ecosystem/blob/9d0a2e6d11e353d0d76eea6247b1d1cfdabbc4a8/demo%20video.mp4)
-
+🎬 [Download BrainTumor demo video](https://github.com/V1shnuviswa/MEDSPACE-A-Healthcare-Ecosystem/blob/219d7d072b8edfe8126017f3382c60b628fc95e3/BrainTumorvid.mp4)
 
 ## 🚀 How to Run the Project
 
