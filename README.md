@@ -78,7 +78,7 @@ By automating diagnostic and administrative tasks, the platform reduces manual w
 
 ---
 ## Demo Video
-🎬 [Download demo video](https://github.com/V1shnuviswa/MEDSPACE-A-Healthcare-Ecosystem/blob/4ee598c407ea33099af3588c823d587863bf264e/WhatsApp%20Video%202025-07-01%20at%2019.02.46.mp4)
+🎬 [Download demo video](https://github.com/V1shnuviswa/MEDSPACE-A-Healthcare-Ecosystem/blob/9d0a2e6d11e353d0d76eea6247b1d1cfdabbc4a8/demo%20video.mp4)
 
 
 ## 🚀 How to Run the Project
