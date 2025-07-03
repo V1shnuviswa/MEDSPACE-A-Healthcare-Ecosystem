@@ -13,7 +13,7 @@ By automating diagnostic and administrative tasks, the platform reduces manual w
 
 ---
 
-## 🌟 Key Features
+## 🌟 Key Features.
 
 ### 🧠 AI Diagnostics
 - Utilizes pre-trained **VGG-19 CNN** and **OpenCV** for brain tumor, fracture, and pneumonia detection.
